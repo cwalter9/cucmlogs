@@ -1,0 +1,6 @@
+copy the cucmlogs.conf to /etc
+edit the conf file as needed
+
+import the db.schema into mysql to build the database
+mysql < db.schema
+
