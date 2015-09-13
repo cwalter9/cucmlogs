@@ -1,0 +1,622 @@
+-- MySQL dump 10.15  Distrib 10.0.17-MariaDB, for Linux (x86_64)
+--
+-- Host: localhost    Database: cdrlogs
+-- ------------------------------------------------------
+-- Server version	10.0.17-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `cdrlogs`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `cdrlogs` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `cdrlogs`;
+
+--
+-- Table structure for table `calltermcodes`
+--
+
+DROP TABLE IF EXISTS `calltermcodes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calltermcodes` (
+  `code` int(8) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cdr`
+--
+
+DROP TABLE IF EXISTS `cdr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cdr` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cdrRecordType` int(11) DEFAULT NULL,
+  `globalCallID_callManagerId` int(11) DEFAULT NULL,
+  `globalCallID_callId` int(11) DEFAULT NULL,
+  `origLegCallIdentifier` int(11) DEFAULT NULL,
+  `dateTimeOrigination` int(11) DEFAULT NULL,
+  `origNodeId` int(11) DEFAULT NULL,
+  `origSpan` int(11) DEFAULT NULL,
+  `origIpAddr` int(11) DEFAULT NULL,
+  `callingPartyNumber` varchar(50) DEFAULT NULL,
+  `callingPartyUnicodeLoginUserID` varchar(128) DEFAULT NULL,
+  `origCause_location` int(11) DEFAULT NULL,
+  `origCause_value` int(11) DEFAULT NULL,
+  `origPrecedenceLevel` int(11) DEFAULT NULL,
+  `origMediaTransportAddress_IP` int(11) DEFAULT NULL,
+  `origMediaTransportAddress_Port` int(11) DEFAULT NULL,
+  `origMediaCap_payloadCapability` int(11) DEFAULT NULL,
+  `origMediaCap_maxFramesPerPacket` int(11) DEFAULT NULL,
+  `origMediaCap_g723BitRate` int(11) DEFAULT NULL,
+  `origVideoCap_Codec` int(11) DEFAULT NULL,
+  `origVideoCap_Bandwidth` int(11) DEFAULT NULL,
+  `origVideoCap_Resolution` int(11) DEFAULT NULL,
+  `origVideoTransportAddress_IP` int(11) DEFAULT NULL,
+  `origVideoTransportAddress_Port` int(11) DEFAULT NULL,
+  `origRSVPAudioStat` varchar(64) DEFAULT NULL,
+  `origRSVPVideoStat` varchar(64) DEFAULT NULL,
+  `destLegIdentifier` int(11) DEFAULT NULL,
+  `destNodeId` int(11) DEFAULT NULL,
+  `destSpan` int(11) DEFAULT NULL,
+  `destIpAddr` int(11) DEFAULT NULL,
+  `originalCalledPartyNumber` varchar(50) DEFAULT NULL,
+  `finalCalledPartyNumber` varchar(50) DEFAULT NULL,
+  `finalCalledPartyUnicodeLoginUserID` varchar(128) DEFAULT NULL,
+  `destCause_location` int(11) DEFAULT NULL,
+  `destCause_value` int(11) DEFAULT NULL,
+  `destPrecedenceLevel` int(11) DEFAULT NULL,
+  `destMediaTransportAddress_IP` int(11) DEFAULT NULL,
+  `destMediaTransportAddress_Port` int(11) DEFAULT NULL,
+  `destMediaCap_payloadCapability` int(11) DEFAULT NULL,
+  `destMediaCap_maxFramesPerPacket` int(11) DEFAULT NULL,
+  `destMediaCap_g723BitRate` int(11) DEFAULT NULL,
+  `destVideoCap_Codec` int(11) DEFAULT NULL,
+  `destVideoCap_Bandwidth` int(11) DEFAULT NULL,
+  `destVideoCap_Resolution` int(11) DEFAULT NULL,
+  `destVideoTransportAddress_IP` int(11) DEFAULT NULL,
+  `destVideoTransportAddress_Port` int(11) DEFAULT NULL,
+  `destRSVPAudioStat` varchar(64) DEFAULT NULL,
+  `destRSVPVideoStat` varchar(64) DEFAULT NULL,
+  `dateTimeConnect` int(11) DEFAULT NULL,
+  `dateTimeDisconnect` int(11) DEFAULT NULL,
+  `lastRedirectDn` varchar(50) DEFAULT NULL,
+  `pkid` int(11) DEFAULT NULL,
+  `originalCalledPartyNumberPartition` varchar(50) DEFAULT NULL,
+  `callingPartyNumberPartition` varchar(50) DEFAULT NULL,
+  `finalCalledPartyNumberPartition` varchar(50) DEFAULT NULL,
+  `lastRedirectDnPartition` varchar(50) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `origDeviceName` varchar(129) DEFAULT NULL,
+  `destDeviceName` varchar(129) DEFAULT NULL,
+  `origCallTerminationOnBehalfOf` int(11) DEFAULT NULL,
+  `destCallTerminationOnBehalfOf` int(11) DEFAULT NULL,
+  `origCalledPartyRedirectOnBehalfOf` int(11) DEFAULT NULL,
+  `lastRedirectRedirectOnBehalfOf` int(11) DEFAULT NULL,
+  `origCalledPartyRedirectReason` int(11) DEFAULT NULL,
+  `lastRedirectRedirectReason` int(11) DEFAULT NULL,
+  `destConversationId` int(11) DEFAULT NULL,
+  `globalCallId_ClusterID` varchar(50) DEFAULT NULL,
+  `joinOnBehalfOf` int(11) DEFAULT NULL,
+  `comment` varchar(2048) DEFAULT NULL,
+  `authCodeDescription` varchar(50) DEFAULT NULL,
+  `authorizationLevel` int(11) DEFAULT NULL,
+  `clientMatterCode` varchar(32) DEFAULT NULL,
+  `origDTMFMethod` int(11) DEFAULT NULL,
+  `destDTMFMethod` int(11) DEFAULT NULL,
+  `callSecuredStatus` int(11) DEFAULT NULL,
+  `origConversationId` int(11) DEFAULT NULL,
+  `origMediaCap_Bandwidth` int(11) DEFAULT NULL,
+  `destMediaCap_Bandwidth` int(11) DEFAULT NULL,
+  `authorizationCodeValue` varchar(32) DEFAULT NULL,
+  `outpulsedCallingPartyNumber` varchar(50) DEFAULT NULL,
+  `outpulsedCalledPartyNumber` varchar(50) DEFAULT NULL,
+  `origIpv4v6Addr` varchar(64) DEFAULT NULL,
+  `destIpv4v6Addr` varchar(64) DEFAULT NULL,
+  `origVideoCap_Codec_Channel2` int(11) DEFAULT NULL,
+  `origVideoCap_Bandwidth_Channel2` int(11) DEFAULT NULL,
+  `origVideoCap_Resolution_Channel2` int(11) DEFAULT NULL,
+  `origVideoTransportAddress_IP_Channel2` int(11) DEFAULT NULL,
+  `origVideoTransportAddress_Port_Channel2` int(11) DEFAULT NULL,
+  `origVideoChannel_Role_Channel2` int(11) DEFAULT NULL,
+  `destVideoCap_Codec_Channel2` int(11) DEFAULT NULL,
+  `destVideoCap_Bandwidth_Channel2` int(11) DEFAULT NULL,
+  `destVideoCap_Resolution_Channel2` int(11) DEFAULT NULL,
+  `destVideoTransportAddress_IP_Channel2` int(11) DEFAULT NULL,
+  `destVideoTransportAddress_Port_Channel2` int(11) DEFAULT NULL,
+  `destVideoChannel_Role_Channel2` int(11) DEFAULT NULL,
+  `IncomingProtocolID` int(11) DEFAULT NULL,
+  `IncomingProtocolCallRef` varchar(32) DEFAULT NULL,
+  `OutgoingProtocolID` int(11) DEFAULT NULL,
+  `OutgoingProtocolCallRef` varchar(32) DEFAULT NULL,
+  `currentRoutingReason` int(11) DEFAULT NULL,
+  `origRoutingReason` int(11) DEFAULT NULL,
+  `lastRedirectingRoutingReason` int(11) DEFAULT NULL,
+  `huntPilotPartition` varchar(50) DEFAULT NULL,
+  `huntPilotDN` varchar(50) DEFAULT NULL,
+  `calledPartyPatternUsage` int(11) DEFAULT NULL,
+  `IncomingICID` varchar(50) DEFAULT NULL,
+  `IncomingOrigIOI` varchar(50) DEFAULT NULL,
+  `IncomingTermIOI` varchar(50) DEFAULT NULL,
+  `OutgoingICID` varchar(50) DEFAULT NULL,
+  `OutgoingOrigIOI` varchar(50) DEFAULT NULL,
+  `OutgoingTermIOI` varchar(50) DEFAULT NULL,
+  `outpulsedOriginalCalledPartyNumber` varchar(50) DEFAULT NULL,
+  `outpulsedLastRedirectingNumber` varchar(50) DEFAULT NULL,
+  `wasCallQueued` int(11) DEFAULT NULL,
+  `totalWaitTimeInQueue` int(11) DEFAULT NULL,
+  `callingPartyNumber_uri` varchar(255) DEFAULT NULL,
+  `originalCalledPartyNumber_uri` varchar(255) DEFAULT NULL,
+  `finalCalledPartyNumber_uri` varchar(255) DEFAULT NULL,
+  `lastRedirectDn_uri` varchar(255) DEFAULT NULL,
+  `mobileCallingPartyNumber` varchar(50) DEFAULT NULL,
+  `finalMobileCalledPartyNumber` varchar(50) DEFAULT NULL,
+  `origMobileDeviceName` varchar(129) DEFAULT NULL,
+  `destMobileDeviceName` varchar(129) DEFAULT NULL,
+  `origMobileCallDuration` int(11) DEFAULT NULL,
+  `destMobileCallDuration` int(11) DEFAULT NULL,
+  `mobileCallType` int(11) DEFAULT NULL,
+  `originalCalledPartyPattern` varchar(50) DEFAULT NULL,
+  `finalCalledPartyPattern` varchar(50) DEFAULT NULL,
+  `lastRedirectingPartyPattern` varchar(50) DEFAULT NULL,
+  `huntPilotPattern` varchar(50) DEFAULT NULL,
+  `status` int(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14683 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `dates`
+--
+
+DROP TABLE IF EXISTS `dates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dates` (
+  `id` int(11) NOT NULL,
+  `dateTimeOrigination` datetime DEFAULT NULL,
+  `dateTimeConnect` datetime DEFAULT NULL,
+  `dateTimeDisconnect` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `recordstats`
+--
+
+DROP TABLE IF EXISTS `recordstats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `recordstats` (
+  `id` int(11) NOT NULL,
+  `ipstat` int(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `repOffhookOnhook`
+--
+
+DROP TABLE IF EXISTS `repOffhookOnhook`;
+/*!50001 DROP VIEW IF EXISTS `repOffhookOnhook`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `repOffhookOnhook` (
+  `id` tinyint NOT NULL,
+  `cdrRecordType` tinyint NOT NULL,
+  `globalCallID_callManagerId` tinyint NOT NULL,
+  `globalCallID_callId` tinyint NOT NULL,
+  `origLegCallIdentifier` tinyint NOT NULL,
+  `dateTimeOrigination` tinyint NOT NULL,
+  `origNodeId` tinyint NOT NULL,
+  `origSpan` tinyint NOT NULL,
+  `origIpAddr` tinyint NOT NULL,
+  `callingPartyNumber` tinyint NOT NULL,
+  `callingPartyUnicodeLoginUserID` tinyint NOT NULL,
+  `origCause_location` tinyint NOT NULL,
+  `origCause_value` tinyint NOT NULL,
+  `origPrecedenceLevel` tinyint NOT NULL,
+  `origMediaTransportAddress_IP` tinyint NOT NULL,
+  `origMediaTransportAddress_Port` tinyint NOT NULL,
+  `origMediaCap_payloadCapability` tinyint NOT NULL,
+  `origMediaCap_maxFramesPerPacket` tinyint NOT NULL,
+  `origMediaCap_g723BitRate` tinyint NOT NULL,
+  `origVideoCap_Codec` tinyint NOT NULL,
+  `origVideoCap_Bandwidth` tinyint NOT NULL,
+  `origVideoCap_Resolution` tinyint NOT NULL,
+  `origVideoTransportAddress_IP` tinyint NOT NULL,
+  `origVideoTransportAddress_Port` tinyint NOT NULL,
+  `origRSVPAudioStat` tinyint NOT NULL,
+  `origRSVPVideoStat` tinyint NOT NULL,
+  `destLegIdentifier` tinyint NOT NULL,
+  `destNodeId` tinyint NOT NULL,
+  `destSpan` tinyint NOT NULL,
+  `destIpAddr` tinyint NOT NULL,
+  `originalCalledPartyNumber` tinyint NOT NULL,
+  `finalCalledPartyNumber` tinyint NOT NULL,
+  `finalCalledPartyUnicodeLoginUserID` tinyint NOT NULL,
+  `destCause_location` tinyint NOT NULL,
+  `destCause_value` tinyint NOT NULL,
+  `destPrecedenceLevel` tinyint NOT NULL,
+  `destMediaTransportAddress_IP` tinyint NOT NULL,
+  `destMediaTransportAddress_Port` tinyint NOT NULL,
+  `destMediaCap_payloadCapability` tinyint NOT NULL,
+  `destMediaCap_maxFramesPerPacket` tinyint NOT NULL,
+  `destMediaCap_g723BitRate` tinyint NOT NULL,
+  `destVideoCap_Codec` tinyint NOT NULL,
+  `destVideoCap_Bandwidth` tinyint NOT NULL,
+  `destVideoCap_Resolution` tinyint NOT NULL,
+  `destVideoTransportAddress_IP` tinyint NOT NULL,
+  `destVideoTransportAddress_Port` tinyint NOT NULL,
+  `destRSVPAudioStat` tinyint NOT NULL,
+  `destRSVPVideoStat` tinyint NOT NULL,
+  `dateTimeConnect` tinyint NOT NULL,
+  `dateTimeDisconnect` tinyint NOT NULL,
+  `lastRedirectDn` tinyint NOT NULL,
+  `pkid` tinyint NOT NULL,
+  `originalCalledPartyNumberPartition` tinyint NOT NULL,
+  `callingPartyNumberPartition` tinyint NOT NULL,
+  `finalCalledPartyNumberPartition` tinyint NOT NULL,
+  `lastRedirectDnPartition` tinyint NOT NULL,
+  `duration` tinyint NOT NULL,
+  `origDeviceName` tinyint NOT NULL,
+  `destDeviceName` tinyint NOT NULL,
+  `origCallTerminationOnBehalfOf` tinyint NOT NULL,
+  `destCallTerminationOnBehalfOf` tinyint NOT NULL,
+  `origCalledPartyRedirectOnBehalfOf` tinyint NOT NULL,
+  `lastRedirectRedirectOnBehalfOf` tinyint NOT NULL,
+  `origCalledPartyRedirectReason` tinyint NOT NULL,
+  `lastRedirectRedirectReason` tinyint NOT NULL,
+  `destConversationId` tinyint NOT NULL,
+  `globalCallId_ClusterID` tinyint NOT NULL,
+  `joinOnBehalfOf` tinyint NOT NULL,
+  `comment` tinyint NOT NULL,
+  `authCodeDescription` tinyint NOT NULL,
+  `authorizationLevel` tinyint NOT NULL,
+  `clientMatterCode` tinyint NOT NULL,
+  `origDTMFMethod` tinyint NOT NULL,
+  `destDTMFMethod` tinyint NOT NULL,
+  `callSecuredStatus` tinyint NOT NULL,
+  `origConversationId` tinyint NOT NULL,
+  `origMediaCap_Bandwidth` tinyint NOT NULL,
+  `destMediaCap_Bandwidth` tinyint NOT NULL,
+  `authorizationCodeValue` tinyint NOT NULL,
+  `outpulsedCallingPartyNumber` tinyint NOT NULL,
+  `outpulsedCalledPartyNumber` tinyint NOT NULL,
+  `origIpv4v6Addr` tinyint NOT NULL,
+  `destIpv4v6Addr` tinyint NOT NULL,
+  `origVideoCap_Codec_Channel2` tinyint NOT NULL,
+  `origVideoCap_Bandwidth_Channel2` tinyint NOT NULL,
+  `origVideoCap_Resolution_Channel2` tinyint NOT NULL,
+  `origVideoTransportAddress_IP_Channel2` tinyint NOT NULL,
+  `origVideoTransportAddress_Port_Channel2` tinyint NOT NULL,
+  `origVideoChannel_Role_Channel2` tinyint NOT NULL,
+  `destVideoCap_Codec_Channel2` tinyint NOT NULL,
+  `destVideoCap_Bandwidth_Channel2` tinyint NOT NULL,
+  `destVideoCap_Resolution_Channel2` tinyint NOT NULL,
+  `destVideoTransportAddress_IP_Channel2` tinyint NOT NULL,
+  `destVideoTransportAddress_Port_Channel2` tinyint NOT NULL,
+  `destVideoChannel_Role_Channel2` tinyint NOT NULL,
+  `IncomingProtocolID` tinyint NOT NULL,
+  `IncomingProtocolCallRef` tinyint NOT NULL,
+  `OutgoingProtocolID` tinyint NOT NULL,
+  `OutgoingProtocolCallRef` tinyint NOT NULL,
+  `currentRoutingReason` tinyint NOT NULL,
+  `origRoutingReason` tinyint NOT NULL,
+  `lastRedirectingRoutingReason` tinyint NOT NULL,
+  `huntPilotPartition` tinyint NOT NULL,
+  `huntPilotDN` tinyint NOT NULL,
+  `calledPartyPatternUsage` tinyint NOT NULL,
+  `IncomingICID` tinyint NOT NULL,
+  `IncomingOrigIOI` tinyint NOT NULL,
+  `IncomingTermIOI` tinyint NOT NULL,
+  `OutgoingICID` tinyint NOT NULL,
+  `OutgoingOrigIOI` tinyint NOT NULL,
+  `OutgoingTermIOI` tinyint NOT NULL,
+  `outpulsedOriginalCalledPartyNumber` tinyint NOT NULL,
+  `outpulsedLastRedirectingNumber` tinyint NOT NULL,
+  `wasCallQueued` tinyint NOT NULL,
+  `totalWaitTimeInQueue` tinyint NOT NULL,
+  `callingPartyNumber_uri` tinyint NOT NULL,
+  `originalCalledPartyNumber_uri` tinyint NOT NULL,
+  `finalCalledPartyNumber_uri` tinyint NOT NULL,
+  `lastRedirectDn_uri` tinyint NOT NULL,
+  `mobileCallingPartyNumber` tinyint NOT NULL,
+  `finalMobileCalledPartyNumber` tinyint NOT NULL,
+  `origMobileDeviceName` tinyint NOT NULL,
+  `destMobileDeviceName` tinyint NOT NULL,
+  `origMobileCallDuration` tinyint NOT NULL,
+  `destMobileCallDuration` tinyint NOT NULL,
+  `mobileCallType` tinyint NOT NULL,
+  `originalCalledPartyPattern` tinyint NOT NULL,
+  `finalCalledPartyPattern` tinyint NOT NULL,
+  `lastRedirectingPartyPattern` tinyint NOT NULL,
+  `huntPilotPattern` tinyint NOT NULL,
+  `status` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `repParkedCalls`
+--
+
+DROP TABLE IF EXISTS `repParkedCalls`;
+/*!50001 DROP VIEW IF EXISTS `repParkedCalls`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `repParkedCalls` (
+  `id` tinyint NOT NULL,
+  `cdrRecordType` tinyint NOT NULL,
+  `globalCallID_callManagerId` tinyint NOT NULL,
+  `globalCallID_callId` tinyint NOT NULL,
+  `origLegCallIdentifier` tinyint NOT NULL,
+  `dateTimeOrigination` tinyint NOT NULL,
+  `origNodeId` tinyint NOT NULL,
+  `origSpan` tinyint NOT NULL,
+  `origIpAddr` tinyint NOT NULL,
+  `callingPartyNumber` tinyint NOT NULL,
+  `callingPartyUnicodeLoginUserID` tinyint NOT NULL,
+  `origCause_location` tinyint NOT NULL,
+  `origCause_value` tinyint NOT NULL,
+  `origPrecedenceLevel` tinyint NOT NULL,
+  `origMediaTransportAddress_IP` tinyint NOT NULL,
+  `origMediaTransportAddress_Port` tinyint NOT NULL,
+  `origMediaCap_payloadCapability` tinyint NOT NULL,
+  `origMediaCap_maxFramesPerPacket` tinyint NOT NULL,
+  `origMediaCap_g723BitRate` tinyint NOT NULL,
+  `origVideoCap_Codec` tinyint NOT NULL,
+  `origVideoCap_Bandwidth` tinyint NOT NULL,
+  `origVideoCap_Resolution` tinyint NOT NULL,
+  `origVideoTransportAddress_IP` tinyint NOT NULL,
+  `origVideoTransportAddress_Port` tinyint NOT NULL,
+  `origRSVPAudioStat` tinyint NOT NULL,
+  `origRSVPVideoStat` tinyint NOT NULL,
+  `destLegIdentifier` tinyint NOT NULL,
+  `destNodeId` tinyint NOT NULL,
+  `destSpan` tinyint NOT NULL,
+  `destIpAddr` tinyint NOT NULL,
+  `originalCalledPartyNumber` tinyint NOT NULL,
+  `finalCalledPartyNumber` tinyint NOT NULL,
+  `finalCalledPartyUnicodeLoginUserID` tinyint NOT NULL,
+  `destCause_location` tinyint NOT NULL,
+  `destCause_value` tinyint NOT NULL,
+  `destPrecedenceLevel` tinyint NOT NULL,
+  `destMediaTransportAddress_IP` tinyint NOT NULL,
+  `destMediaTransportAddress_Port` tinyint NOT NULL,
+  `destMediaCap_payloadCapability` tinyint NOT NULL,
+  `destMediaCap_maxFramesPerPacket` tinyint NOT NULL,
+  `destMediaCap_g723BitRate` tinyint NOT NULL,
+  `destVideoCap_Codec` tinyint NOT NULL,
+  `destVideoCap_Bandwidth` tinyint NOT NULL,
+  `destVideoCap_Resolution` tinyint NOT NULL,
+  `destVideoTransportAddress_IP` tinyint NOT NULL,
+  `destVideoTransportAddress_Port` tinyint NOT NULL,
+  `destRSVPAudioStat` tinyint NOT NULL,
+  `destRSVPVideoStat` tinyint NOT NULL,
+  `dateTimeConnect` tinyint NOT NULL,
+  `dateTimeDisconnect` tinyint NOT NULL,
+  `lastRedirectDn` tinyint NOT NULL,
+  `pkid` tinyint NOT NULL,
+  `originalCalledPartyNumberPartition` tinyint NOT NULL,
+  `callingPartyNumberPartition` tinyint NOT NULL,
+  `finalCalledPartyNumberPartition` tinyint NOT NULL,
+  `lastRedirectDnPartition` tinyint NOT NULL,
+  `duration` tinyint NOT NULL,
+  `origDeviceName` tinyint NOT NULL,
+  `destDeviceName` tinyint NOT NULL,
+  `origCallTerminationOnBehalfOf` tinyint NOT NULL,
+  `destCallTerminationOnBehalfOf` tinyint NOT NULL,
+  `origCalledPartyRedirectOnBehalfOf` tinyint NOT NULL,
+  `lastRedirectRedirectOnBehalfOf` tinyint NOT NULL,
+  `origCalledPartyRedirectReason` tinyint NOT NULL,
+  `lastRedirectRedirectReason` tinyint NOT NULL,
+  `destConversationId` tinyint NOT NULL,
+  `globalCallId_ClusterID` tinyint NOT NULL,
+  `joinOnBehalfOf` tinyint NOT NULL,
+  `comment` tinyint NOT NULL,
+  `authCodeDescription` tinyint NOT NULL,
+  `authorizationLevel` tinyint NOT NULL,
+  `clientMatterCode` tinyint NOT NULL,
+  `origDTMFMethod` tinyint NOT NULL,
+  `destDTMFMethod` tinyint NOT NULL,
+  `callSecuredStatus` tinyint NOT NULL,
+  `origConversationId` tinyint NOT NULL,
+  `origMediaCap_Bandwidth` tinyint NOT NULL,
+  `destMediaCap_Bandwidth` tinyint NOT NULL,
+  `authorizationCodeValue` tinyint NOT NULL,
+  `outpulsedCallingPartyNumber` tinyint NOT NULL,
+  `outpulsedCalledPartyNumber` tinyint NOT NULL,
+  `origIpv4v6Addr` tinyint NOT NULL,
+  `destIpv4v6Addr` tinyint NOT NULL,
+  `origVideoCap_Codec_Channel2` tinyint NOT NULL,
+  `origVideoCap_Bandwidth_Channel2` tinyint NOT NULL,
+  `origVideoCap_Resolution_Channel2` tinyint NOT NULL,
+  `origVideoTransportAddress_IP_Channel2` tinyint NOT NULL,
+  `origVideoTransportAddress_Port_Channel2` tinyint NOT NULL,
+  `origVideoChannel_Role_Channel2` tinyint NOT NULL,
+  `destVideoCap_Codec_Channel2` tinyint NOT NULL,
+  `destVideoCap_Bandwidth_Channel2` tinyint NOT NULL,
+  `destVideoCap_Resolution_Channel2` tinyint NOT NULL,
+  `destVideoTransportAddress_IP_Channel2` tinyint NOT NULL,
+  `destVideoTransportAddress_Port_Channel2` tinyint NOT NULL,
+  `destVideoChannel_Role_Channel2` tinyint NOT NULL,
+  `IncomingProtocolID` tinyint NOT NULL,
+  `IncomingProtocolCallRef` tinyint NOT NULL,
+  `OutgoingProtocolID` tinyint NOT NULL,
+  `OutgoingProtocolCallRef` tinyint NOT NULL,
+  `currentRoutingReason` tinyint NOT NULL,
+  `origRoutingReason` tinyint NOT NULL,
+  `lastRedirectingRoutingReason` tinyint NOT NULL,
+  `huntPilotPartition` tinyint NOT NULL,
+  `huntPilotDN` tinyint NOT NULL,
+  `calledPartyPatternUsage` tinyint NOT NULL,
+  `IncomingICID` tinyint NOT NULL,
+  `IncomingOrigIOI` tinyint NOT NULL,
+  `IncomingTermIOI` tinyint NOT NULL,
+  `OutgoingICID` tinyint NOT NULL,
+  `OutgoingOrigIOI` tinyint NOT NULL,
+  `OutgoingTermIOI` tinyint NOT NULL,
+  `outpulsedOriginalCalledPartyNumber` tinyint NOT NULL,
+  `outpulsedLastRedirectingNumber` tinyint NOT NULL,
+  `wasCallQueued` tinyint NOT NULL,
+  `totalWaitTimeInQueue` tinyint NOT NULL,
+  `callingPartyNumber_uri` tinyint NOT NULL,
+  `originalCalledPartyNumber_uri` tinyint NOT NULL,
+  `finalCalledPartyNumber_uri` tinyint NOT NULL,
+  `lastRedirectDn_uri` tinyint NOT NULL,
+  `mobileCallingPartyNumber` tinyint NOT NULL,
+  `finalMobileCalledPartyNumber` tinyint NOT NULL,
+  `origMobileDeviceName` tinyint NOT NULL,
+  `destMobileDeviceName` tinyint NOT NULL,
+  `origMobileCallDuration` tinyint NOT NULL,
+  `destMobileCallDuration` tinyint NOT NULL,
+  `mobileCallType` tinyint NOT NULL,
+  `originalCalledPartyPattern` tinyint NOT NULL,
+  `finalCalledPartyPattern` tinyint NOT NULL,
+  `lastRedirectingPartyPattern` tinyint NOT NULL,
+  `huntPilotPattern` tinyint NOT NULL,
+  `status` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `repVoicemail`
+--
+
+DROP TABLE IF EXISTS `repVoicemail`;
+/*!50001 DROP VIEW IF EXISTS `repVoicemail`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `repVoicemail` (
+  `id` tinyint NOT NULL,
+  `dateTimeOrigination` tinyint NOT NULL,
+  `callingPartyNumber` tinyint NOT NULL,
+  `originalCalledPartyNumber` tinyint NOT NULL,
+  `description` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `shfixup`
+--
+
+DROP TABLE IF EXISTS `shfixup`;
+/*!50001 DROP VIEW IF EXISTS `shfixup`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `shfixup` (
+  `id` tinyint NOT NULL,
+  `origIpAddr` tinyint NOT NULL,
+  `ipstat` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Current Database: `cdrlogs`
+--
+
+USE `cdrlogs`;
+
+--
+-- Final view structure for view `repOffhookOnhook`
+--
+
+/*!50001 DROP TABLE IF EXISTS `repOffhookOnhook`*/;
+/*!50001 DROP VIEW IF EXISTS `repOffhookOnhook`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`admincw`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `repOffhookOnhook` AS (select `cdr`.`id` AS `id`,`cdr`.`cdrRecordType` AS `cdrRecordType`,`cdr`.`globalCallID_callManagerId` AS `globalCallID_callManagerId`,`cdr`.`globalCallID_callId` AS `globalCallID_callId`,`cdr`.`origLegCallIdentifier` AS `origLegCallIdentifier`,`cdr`.`dateTimeOrigination` AS `dateTimeOrigination`,`cdr`.`origNodeId` AS `origNodeId`,`cdr`.`origSpan` AS `origSpan`,`cdr`.`origIpAddr` AS `origIpAddr`,`cdr`.`callingPartyNumber` AS `callingPartyNumber`,`cdr`.`callingPartyUnicodeLoginUserID` AS `callingPartyUnicodeLoginUserID`,`cdr`.`origCause_location` AS `origCause_location`,`cdr`.`origCause_value` AS `origCause_value`,`cdr`.`origPrecedenceLevel` AS `origPrecedenceLevel`,`cdr`.`origMediaTransportAddress_IP` AS `origMediaTransportAddress_IP`,`cdr`.`origMediaTransportAddress_Port` AS `origMediaTransportAddress_Port`,`cdr`.`origMediaCap_payloadCapability` AS `origMediaCap_payloadCapability`,`cdr`.`origMediaCap_maxFramesPerPacket` AS `origMediaCap_maxFramesPerPacket`,`cdr`.`origMediaCap_g723BitRate` AS `origMediaCap_g723BitRate`,`cdr`.`origVideoCap_Codec` AS `origVideoCap_Codec`,`cdr`.`origVideoCap_Bandwidth` AS `origVideoCap_Bandwidth`,`cdr`.`origVideoCap_Resolution` AS `origVideoCap_Resolution`,`cdr`.`origVideoTransportAddress_IP` AS `origVideoTransportAddress_IP`,`cdr`.`origVideoTransportAddress_Port` AS `origVideoTransportAddress_Port`,`cdr`.`origRSVPAudioStat` AS `origRSVPAudioStat`,`cdr`.`origRSVPVideoStat` AS `origRSVPVideoStat`,`cdr`.`destLegIdentifier` AS `destLegIdentifier`,`cdr`.`destNodeId` AS `destNodeId`,`cdr`.`destSpan` AS `destSpan`,`cdr`.`destIpAddr` AS `destIpAddr`,`cdr`.`originalCalledPartyNumber` AS `originalCalledPartyNumber`,`cdr`.`finalCalledPartyNumber` AS `finalCalledPartyNumber`,`cdr`.`finalCalledPartyUnicodeLoginUserID` AS `finalCalledPartyUnicodeLoginUserID`,`cdr`.`destCause_location` AS `destCause_location`,`cdr`.`destCause_value` AS `destCause_value`,`cdr`.`destPrecedenceLevel` AS `destPrecedenceLevel`,`cdr`.`destMediaTransportAddress_IP` AS `destMediaTransportAddress_IP`,`cdr`.`destMediaTransportAddress_Port` AS `destMediaTransportAddress_Port`,`cdr`.`destMediaCap_payloadCapability` AS `destMediaCap_payloadCapability`,`cdr`.`destMediaCap_maxFramesPerPacket` AS `destMediaCap_maxFramesPerPacket`,`cdr`.`destMediaCap_g723BitRate` AS `destMediaCap_g723BitRate`,`cdr`.`destVideoCap_Codec` AS `destVideoCap_Codec`,`cdr`.`destVideoCap_Bandwidth` AS `destVideoCap_Bandwidth`,`cdr`.`destVideoCap_Resolution` AS `destVideoCap_Resolution`,`cdr`.`destVideoTransportAddress_IP` AS `destVideoTransportAddress_IP`,`cdr`.`destVideoTransportAddress_Port` AS `destVideoTransportAddress_Port`,`cdr`.`destRSVPAudioStat` AS `destRSVPAudioStat`,`cdr`.`destRSVPVideoStat` AS `destRSVPVideoStat`,`cdr`.`dateTimeConnect` AS `dateTimeConnect`,`cdr`.`dateTimeDisconnect` AS `dateTimeDisconnect`,`cdr`.`lastRedirectDn` AS `lastRedirectDn`,`cdr`.`pkid` AS `pkid`,`cdr`.`originalCalledPartyNumberPartition` AS `originalCalledPartyNumberPartition`,`cdr`.`callingPartyNumberPartition` AS `callingPartyNumberPartition`,`cdr`.`finalCalledPartyNumberPartition` AS `finalCalledPartyNumberPartition`,`cdr`.`lastRedirectDnPartition` AS `lastRedirectDnPartition`,`cdr`.`duration` AS `duration`,`cdr`.`origDeviceName` AS `origDeviceName`,`cdr`.`destDeviceName` AS `destDeviceName`,`cdr`.`origCallTerminationOnBehalfOf` AS `origCallTerminationOnBehalfOf`,`cdr`.`destCallTerminationOnBehalfOf` AS `destCallTerminationOnBehalfOf`,`cdr`.`origCalledPartyRedirectOnBehalfOf` AS `origCalledPartyRedirectOnBehalfOf`,`cdr`.`lastRedirectRedirectOnBehalfOf` AS `lastRedirectRedirectOnBehalfOf`,`cdr`.`origCalledPartyRedirectReason` AS `origCalledPartyRedirectReason`,`cdr`.`lastRedirectRedirectReason` AS `lastRedirectRedirectReason`,`cdr`.`destConversationId` AS `destConversationId`,`cdr`.`globalCallId_ClusterID` AS `globalCallId_ClusterID`,`cdr`.`joinOnBehalfOf` AS `joinOnBehalfOf`,`cdr`.`comment` AS `comment`,`cdr`.`authCodeDescription` AS `authCodeDescription`,`cdr`.`authorizationLevel` AS `authorizationLevel`,`cdr`.`clientMatterCode` AS `clientMatterCode`,`cdr`.`origDTMFMethod` AS `origDTMFMethod`,`cdr`.`destDTMFMethod` AS `destDTMFMethod`,`cdr`.`callSecuredStatus` AS `callSecuredStatus`,`cdr`.`origConversationId` AS `origConversationId`,`cdr`.`origMediaCap_Bandwidth` AS `origMediaCap_Bandwidth`,`cdr`.`destMediaCap_Bandwidth` AS `destMediaCap_Bandwidth`,`cdr`.`authorizationCodeValue` AS `authorizationCodeValue`,`cdr`.`outpulsedCallingPartyNumber` AS `outpulsedCallingPartyNumber`,`cdr`.`outpulsedCalledPartyNumber` AS `outpulsedCalledPartyNumber`,`cdr`.`origIpv4v6Addr` AS `origIpv4v6Addr`,`cdr`.`destIpv4v6Addr` AS `destIpv4v6Addr`,`cdr`.`origVideoCap_Codec_Channel2` AS `origVideoCap_Codec_Channel2`,`cdr`.`origVideoCap_Bandwidth_Channel2` AS `origVideoCap_Bandwidth_Channel2`,`cdr`.`origVideoCap_Resolution_Channel2` AS `origVideoCap_Resolution_Channel2`,`cdr`.`origVideoTransportAddress_IP_Channel2` AS `origVideoTransportAddress_IP_Channel2`,`cdr`.`origVideoTransportAddress_Port_Channel2` AS `origVideoTransportAddress_Port_Channel2`,`cdr`.`origVideoChannel_Role_Channel2` AS `origVideoChannel_Role_Channel2`,`cdr`.`destVideoCap_Codec_Channel2` AS `destVideoCap_Codec_Channel2`,`cdr`.`destVideoCap_Bandwidth_Channel2` AS `destVideoCap_Bandwidth_Channel2`,`cdr`.`destVideoCap_Resolution_Channel2` AS `destVideoCap_Resolution_Channel2`,`cdr`.`destVideoTransportAddress_IP_Channel2` AS `destVideoTransportAddress_IP_Channel2`,`cdr`.`destVideoTransportAddress_Port_Channel2` AS `destVideoTransportAddress_Port_Channel2`,`cdr`.`destVideoChannel_Role_Channel2` AS `destVideoChannel_Role_Channel2`,`cdr`.`IncomingProtocolID` AS `IncomingProtocolID`,`cdr`.`IncomingProtocolCallRef` AS `IncomingProtocolCallRef`,`cdr`.`OutgoingProtocolID` AS `OutgoingProtocolID`,`cdr`.`OutgoingProtocolCallRef` AS `OutgoingProtocolCallRef`,`cdr`.`currentRoutingReason` AS `currentRoutingReason`,`cdr`.`origRoutingReason` AS `origRoutingReason`,`cdr`.`lastRedirectingRoutingReason` AS `lastRedirectingRoutingReason`,`cdr`.`huntPilotPartition` AS `huntPilotPartition`,`cdr`.`huntPilotDN` AS `huntPilotDN`,`cdr`.`calledPartyPatternUsage` AS `calledPartyPatternUsage`,`cdr`.`IncomingICID` AS `IncomingICID`,`cdr`.`IncomingOrigIOI` AS `IncomingOrigIOI`,`cdr`.`IncomingTermIOI` AS `IncomingTermIOI`,`cdr`.`OutgoingICID` AS `OutgoingICID`,`cdr`.`OutgoingOrigIOI` AS `OutgoingOrigIOI`,`cdr`.`OutgoingTermIOI` AS `OutgoingTermIOI`,`cdr`.`outpulsedOriginalCalledPartyNumber` AS `outpulsedOriginalCalledPartyNumber`,`cdr`.`outpulsedLastRedirectingNumber` AS `outpulsedLastRedirectingNumber`,`cdr`.`wasCallQueued` AS `wasCallQueued`,`cdr`.`totalWaitTimeInQueue` AS `totalWaitTimeInQueue`,`cdr`.`callingPartyNumber_uri` AS `callingPartyNumber_uri`,`cdr`.`originalCalledPartyNumber_uri` AS `originalCalledPartyNumber_uri`,`cdr`.`finalCalledPartyNumber_uri` AS `finalCalledPartyNumber_uri`,`cdr`.`lastRedirectDn_uri` AS `lastRedirectDn_uri`,`cdr`.`mobileCallingPartyNumber` AS `mobileCallingPartyNumber`,`cdr`.`finalMobileCalledPartyNumber` AS `finalMobileCalledPartyNumber`,`cdr`.`origMobileDeviceName` AS `origMobileDeviceName`,`cdr`.`destMobileDeviceName` AS `destMobileDeviceName`,`cdr`.`origMobileCallDuration` AS `origMobileCallDuration`,`cdr`.`destMobileCallDuration` AS `destMobileCallDuration`,`cdr`.`mobileCallType` AS `mobileCallType`,`cdr`.`originalCalledPartyPattern` AS `originalCalledPartyPattern`,`cdr`.`finalCalledPartyPattern` AS `finalCalledPartyPattern`,`cdr`.`lastRedirectingPartyPattern` AS `lastRedirectingPartyPattern`,`cdr`.`huntPilotPattern` AS `huntPilotPattern`,`cdr`.`status` AS `status` from `cdr` where (isnull(`cdr`.`originalCalledPartyNumber`) and isnull(`cdr`.`finalCalledPartyNumber`) and isnull(`cdr`.`lastRedirectDn`) and (`cdr`.`origCause_value` = 16) and (`cdr`.`duration` = 0))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `repParkedCalls`
+--
+
+/*!50001 DROP TABLE IF EXISTS `repParkedCalls`*/;
+/*!50001 DROP VIEW IF EXISTS `repParkedCalls`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`admincw`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `repParkedCalls` AS (select `cdr`.`id` AS `id`,`cdr`.`cdrRecordType` AS `cdrRecordType`,`cdr`.`globalCallID_callManagerId` AS `globalCallID_callManagerId`,`cdr`.`globalCallID_callId` AS `globalCallID_callId`,`cdr`.`origLegCallIdentifier` AS `origLegCallIdentifier`,`cdr`.`dateTimeOrigination` AS `dateTimeOrigination`,`cdr`.`origNodeId` AS `origNodeId`,`cdr`.`origSpan` AS `origSpan`,`cdr`.`origIpAddr` AS `origIpAddr`,`cdr`.`callingPartyNumber` AS `callingPartyNumber`,`cdr`.`callingPartyUnicodeLoginUserID` AS `callingPartyUnicodeLoginUserID`,`cdr`.`origCause_location` AS `origCause_location`,`cdr`.`origCause_value` AS `origCause_value`,`cdr`.`origPrecedenceLevel` AS `origPrecedenceLevel`,`cdr`.`origMediaTransportAddress_IP` AS `origMediaTransportAddress_IP`,`cdr`.`origMediaTransportAddress_Port` AS `origMediaTransportAddress_Port`,`cdr`.`origMediaCap_payloadCapability` AS `origMediaCap_payloadCapability`,`cdr`.`origMediaCap_maxFramesPerPacket` AS `origMediaCap_maxFramesPerPacket`,`cdr`.`origMediaCap_g723BitRate` AS `origMediaCap_g723BitRate`,`cdr`.`origVideoCap_Codec` AS `origVideoCap_Codec`,`cdr`.`origVideoCap_Bandwidth` AS `origVideoCap_Bandwidth`,`cdr`.`origVideoCap_Resolution` AS `origVideoCap_Resolution`,`cdr`.`origVideoTransportAddress_IP` AS `origVideoTransportAddress_IP`,`cdr`.`origVideoTransportAddress_Port` AS `origVideoTransportAddress_Port`,`cdr`.`origRSVPAudioStat` AS `origRSVPAudioStat`,`cdr`.`origRSVPVideoStat` AS `origRSVPVideoStat`,`cdr`.`destLegIdentifier` AS `destLegIdentifier`,`cdr`.`destNodeId` AS `destNodeId`,`cdr`.`destSpan` AS `destSpan`,`cdr`.`destIpAddr` AS `destIpAddr`,`cdr`.`originalCalledPartyNumber` AS `originalCalledPartyNumber`,`cdr`.`finalCalledPartyNumber` AS `finalCalledPartyNumber`,`cdr`.`finalCalledPartyUnicodeLoginUserID` AS `finalCalledPartyUnicodeLoginUserID`,`cdr`.`destCause_location` AS `destCause_location`,`cdr`.`destCause_value` AS `destCause_value`,`cdr`.`destPrecedenceLevel` AS `destPrecedenceLevel`,`cdr`.`destMediaTransportAddress_IP` AS `destMediaTransportAddress_IP`,`cdr`.`destMediaTransportAddress_Port` AS `destMediaTransportAddress_Port`,`cdr`.`destMediaCap_payloadCapability` AS `destMediaCap_payloadCapability`,`cdr`.`destMediaCap_maxFramesPerPacket` AS `destMediaCap_maxFramesPerPacket`,`cdr`.`destMediaCap_g723BitRate` AS `destMediaCap_g723BitRate`,`cdr`.`destVideoCap_Codec` AS `destVideoCap_Codec`,`cdr`.`destVideoCap_Bandwidth` AS `destVideoCap_Bandwidth`,`cdr`.`destVideoCap_Resolution` AS `destVideoCap_Resolution`,`cdr`.`destVideoTransportAddress_IP` AS `destVideoTransportAddress_IP`,`cdr`.`destVideoTransportAddress_Port` AS `destVideoTransportAddress_Port`,`cdr`.`destRSVPAudioStat` AS `destRSVPAudioStat`,`cdr`.`destRSVPVideoStat` AS `destRSVPVideoStat`,`cdr`.`dateTimeConnect` AS `dateTimeConnect`,`cdr`.`dateTimeDisconnect` AS `dateTimeDisconnect`,`cdr`.`lastRedirectDn` AS `lastRedirectDn`,`cdr`.`pkid` AS `pkid`,`cdr`.`originalCalledPartyNumberPartition` AS `originalCalledPartyNumberPartition`,`cdr`.`callingPartyNumberPartition` AS `callingPartyNumberPartition`,`cdr`.`finalCalledPartyNumberPartition` AS `finalCalledPartyNumberPartition`,`cdr`.`lastRedirectDnPartition` AS `lastRedirectDnPartition`,`cdr`.`duration` AS `duration`,`cdr`.`origDeviceName` AS `origDeviceName`,`cdr`.`destDeviceName` AS `destDeviceName`,`cdr`.`origCallTerminationOnBehalfOf` AS `origCallTerminationOnBehalfOf`,`cdr`.`destCallTerminationOnBehalfOf` AS `destCallTerminationOnBehalfOf`,`cdr`.`origCalledPartyRedirectOnBehalfOf` AS `origCalledPartyRedirectOnBehalfOf`,`cdr`.`lastRedirectRedirectOnBehalfOf` AS `lastRedirectRedirectOnBehalfOf`,`cdr`.`origCalledPartyRedirectReason` AS `origCalledPartyRedirectReason`,`cdr`.`lastRedirectRedirectReason` AS `lastRedirectRedirectReason`,`cdr`.`destConversationId` AS `destConversationId`,`cdr`.`globalCallId_ClusterID` AS `globalCallId_ClusterID`,`cdr`.`joinOnBehalfOf` AS `joinOnBehalfOf`,`cdr`.`comment` AS `comment`,`cdr`.`authCodeDescription` AS `authCodeDescription`,`cdr`.`authorizationLevel` AS `authorizationLevel`,`cdr`.`clientMatterCode` AS `clientMatterCode`,`cdr`.`origDTMFMethod` AS `origDTMFMethod`,`cdr`.`destDTMFMethod` AS `destDTMFMethod`,`cdr`.`callSecuredStatus` AS `callSecuredStatus`,`cdr`.`origConversationId` AS `origConversationId`,`cdr`.`origMediaCap_Bandwidth` AS `origMediaCap_Bandwidth`,`cdr`.`destMediaCap_Bandwidth` AS `destMediaCap_Bandwidth`,`cdr`.`authorizationCodeValue` AS `authorizationCodeValue`,`cdr`.`outpulsedCallingPartyNumber` AS `outpulsedCallingPartyNumber`,`cdr`.`outpulsedCalledPartyNumber` AS `outpulsedCalledPartyNumber`,`cdr`.`origIpv4v6Addr` AS `origIpv4v6Addr`,`cdr`.`destIpv4v6Addr` AS `destIpv4v6Addr`,`cdr`.`origVideoCap_Codec_Channel2` AS `origVideoCap_Codec_Channel2`,`cdr`.`origVideoCap_Bandwidth_Channel2` AS `origVideoCap_Bandwidth_Channel2`,`cdr`.`origVideoCap_Resolution_Channel2` AS `origVideoCap_Resolution_Channel2`,`cdr`.`origVideoTransportAddress_IP_Channel2` AS `origVideoTransportAddress_IP_Channel2`,`cdr`.`origVideoTransportAddress_Port_Channel2` AS `origVideoTransportAddress_Port_Channel2`,`cdr`.`origVideoChannel_Role_Channel2` AS `origVideoChannel_Role_Channel2`,`cdr`.`destVideoCap_Codec_Channel2` AS `destVideoCap_Codec_Channel2`,`cdr`.`destVideoCap_Bandwidth_Channel2` AS `destVideoCap_Bandwidth_Channel2`,`cdr`.`destVideoCap_Resolution_Channel2` AS `destVideoCap_Resolution_Channel2`,`cdr`.`destVideoTransportAddress_IP_Channel2` AS `destVideoTransportAddress_IP_Channel2`,`cdr`.`destVideoTransportAddress_Port_Channel2` AS `destVideoTransportAddress_Port_Channel2`,`cdr`.`destVideoChannel_Role_Channel2` AS `destVideoChannel_Role_Channel2`,`cdr`.`IncomingProtocolID` AS `IncomingProtocolID`,`cdr`.`IncomingProtocolCallRef` AS `IncomingProtocolCallRef`,`cdr`.`OutgoingProtocolID` AS `OutgoingProtocolID`,`cdr`.`OutgoingProtocolCallRef` AS `OutgoingProtocolCallRef`,`cdr`.`currentRoutingReason` AS `currentRoutingReason`,`cdr`.`origRoutingReason` AS `origRoutingReason`,`cdr`.`lastRedirectingRoutingReason` AS `lastRedirectingRoutingReason`,`cdr`.`huntPilotPartition` AS `huntPilotPartition`,`cdr`.`huntPilotDN` AS `huntPilotDN`,`cdr`.`calledPartyPatternUsage` AS `calledPartyPatternUsage`,`cdr`.`IncomingICID` AS `IncomingICID`,`cdr`.`IncomingOrigIOI` AS `IncomingOrigIOI`,`cdr`.`IncomingTermIOI` AS `IncomingTermIOI`,`cdr`.`OutgoingICID` AS `OutgoingICID`,`cdr`.`OutgoingOrigIOI` AS `OutgoingOrigIOI`,`cdr`.`OutgoingTermIOI` AS `OutgoingTermIOI`,`cdr`.`outpulsedOriginalCalledPartyNumber` AS `outpulsedOriginalCalledPartyNumber`,`cdr`.`outpulsedLastRedirectingNumber` AS `outpulsedLastRedirectingNumber`,`cdr`.`wasCallQueued` AS `wasCallQueued`,`cdr`.`totalWaitTimeInQueue` AS `totalWaitTimeInQueue`,`cdr`.`callingPartyNumber_uri` AS `callingPartyNumber_uri`,`cdr`.`originalCalledPartyNumber_uri` AS `originalCalledPartyNumber_uri`,`cdr`.`finalCalledPartyNumber_uri` AS `finalCalledPartyNumber_uri`,`cdr`.`lastRedirectDn_uri` AS `lastRedirectDn_uri`,`cdr`.`mobileCallingPartyNumber` AS `mobileCallingPartyNumber`,`cdr`.`finalMobileCalledPartyNumber` AS `finalMobileCalledPartyNumber`,`cdr`.`origMobileDeviceName` AS `origMobileDeviceName`,`cdr`.`destMobileDeviceName` AS `destMobileDeviceName`,`cdr`.`origMobileCallDuration` AS `origMobileCallDuration`,`cdr`.`destMobileCallDuration` AS `destMobileCallDuration`,`cdr`.`mobileCallType` AS `mobileCallType`,`cdr`.`originalCalledPartyPattern` AS `originalCalledPartyPattern`,`cdr`.`finalCalledPartyPattern` AS `finalCalledPartyPattern`,`cdr`.`lastRedirectingPartyPattern` AS `lastRedirectingPartyPattern`,`cdr`.`huntPilotPattern` AS `huntPilotPattern`,`cdr`.`status` AS `status` from `cdr` where ((`cdr`.`origCause_value` = 393216) and (`cdr`.`origCallTerminationOnBehalfOf` = 3) and (`cdr`.`destCallTerminationOnBehalfOf` = 3) and (`cdr`.`destSpan` = 0))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `repVoicemail`
+--
+
+/*!50001 DROP TABLE IF EXISTS `repVoicemail`*/;
+/*!50001 DROP VIEW IF EXISTS `repVoicemail`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`admincw`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `repVoicemail` AS (select `cdr`.`id` AS `id`,`dates`.`dateTimeOrigination` AS `dateTimeOrigination`,`cdr`.`callingPartyNumber` AS `callingPartyNumber`,`cdr`.`originalCalledPartyNumber` AS `originalCalledPartyNumber`,`calltermcodes`.`description` AS `description` from ((`cdr` join `dates`) join `calltermcodes`) where ((`cdr`.`id` = `dates`.`id`) and (`cdr`.`origCause_value` = `calltermcodes`.`code`) and (`cdr`.`finalCalledPartyNumber` = 1540) and (`cdr`.`originalCalledPartyNumber` <> 1540))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `shfixup`
+--
+
+/*!50001 DROP TABLE IF EXISTS `shfixup`*/;
+/*!50001 DROP VIEW IF EXISTS `shfixup`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`admincw`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `shfixup` AS (select `cdr`.`id` AS `id`,`cdr`.`origIpAddr` AS `origIpAddr`,`recordstats`.`ipstat` AS `ipstat` from (`cdr` left join `recordstats` on((`recordstats`.`id` = `cdr`.`id`)))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-09-13  9:07:51
