@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cd /tmp
+
+if [ -f getlogs.pid ]; then
+  exit 2
+else
+  touch getlogs.pid
+fi
+
+for i in `ssh 10.1.1.11 'ls /home/cdrlogs/cdr*'`; do
+  scp 1.1.1.1:$i .
+  ssh 1.1.1.1 "rm -rf $i"
+done
+
+fcnt=`ls /tmp/cdr* | wc -l`
+if [ $fcnt != 0 ]; then
+  echo "`date` - getlogs retrieved $fcnt cdr files from 1.1.1.1" >> /var/log/cdrlogs
+fi
+
+rm -rf /tmp/getlogs.pid

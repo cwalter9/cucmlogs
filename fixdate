@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ -f /tmp/fixdate.pid ]; then
+  exit 2
+else
+  touch /tmp/fixdate.pid
+fi
+
+mysql='mysql -Dcdrlogs -s'
+
+scnt=`echo "select count(*) from cdr where status=0" | $mysql`
+
+for i in `echo "select id from cdr where status=0" | $mysql`; do
+  dorig=`echo "select dateTimeOrigination from cdr where id=$i" | $mysql`
+  dconn=`echo "select dateTimeConnect from cdr where id=$i" | $mysql`
+  ddcon=`echo "select dateTimeDisconnect from cdr where id=$i" | $mysql`
+  forig=`date '+%F %T' -d @$dorig`
+  fconn=`date '+%F %T' -d @$dconn`
+  fdcon=`date '+%F %T' -d @$ddcon`
+  echo "insert into dates set id=$i,dateTimeOrigination='$forig',dateTimeConnect='$fconn',dateTimeDisconnect='$fdcon'" | $mysql
+  echo "update cdr set status=1 where id=$i" | $mysql
+done
+
+fcnt=`echo "select count(*) from cdr where status=0" | $mysql`
+pcnt=`echo "$scnt - $fcnt | bc`
+if [ ! -z $pcnt ]; then
+  echo "`date` - fixdate processed $pcnt records" >> /var/log/cdrlogs
+fi
+  echo "`date` - fixdate processed $pcnt records" >> /var/log/cdrlogs
+
+rm -rf /tmp/fixdate.pid
