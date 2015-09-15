@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PROCNAME="process"
+
+cd /home/cdrlogs
+. functions
+checkrun
+
+./cdrlogs
+./cmrlogs
+./fixdate
+
+dolog "run complete"
+rm -rf $CDR_PIDFILE

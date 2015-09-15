@@ -1,0 +1,44 @@
+#!/bin/bash
+
+PIDFILE="/tmp/cmrlogs.pid"
+PROCNAME="cmrlogs"
+
+cd /home/cdrlogs
+. functions
+checkrun
+checksql
+
+cd /home/cdrlogs/incoming
+
+scnt=`echo "select count(id) from cmr" | mysql -Dcdrlogs -s`
+
+for i in `ls cmr_*`; do
+  sed '1d' $i | sed '1d' - | sed -e "s/\"/'/g" - | sed -e "s/''//g" - > cmr-$i
+  rm -rf $i
+done
+
+for i in `ls cmr-*`; do
+  fname=`echo $i | gawk -F- '{ print $2 }'`
+  sed 's/^/echo "insert into cmr (cdrRecordType,globalCallID_callManagerId,globalCallID_callId,nodeId,directoryNum,callIdentifier,dateTimeStamp,numberPacketsSent,numberOctetsSent,numberPacketsReceived,numberOctetsReceived,numberPacketsLost,jitter,latency,pkid,directoryNumPartition,globalCallId_ClusterID,deviceName,varVQMetrics,duration,videoContentType,videoDuration,numberVideoPacketsSent,numberVideoOctetsSent,numberVideoPacketsReceived,numberVideoOctetsReceived,numberVideoPacketsLost,videoAverageJitter,videoRoundTripTime,videoOneWayDelay,videoReceptionMetrics,videoTransmissionMetrics,videoContentType_channel2,videoDuration_channel2,numberVideoPacketsSent_channel2,numberVideoOctetsSent_channel2,numberVideoPacketsReceived_channel2,numberVideoOctetsReceived_channel2,numberVideoPacketsLost_channel2,videoAverageJitter_channel2,videoRoundTripTime_channel2,videoOneWayDelay_channel2,videoReceptionMetrics_channel2,videoTransmissionMetrics_channel2) values (/' $i > cmrt-$fname
+  rm -rf $i
+done
+
+for i in `ls cmrt-*`; do
+  fname=`echo $i | gawk -F- '{ print $2 }'`
+  sed 's/$/)" | mysql -Dcdrlogs/' $i | sed -e "s/,,/,'',/g" - | sed -e "s/,,/,'',/g" - | sed -e "s/',)/','')/g" - > cmrm-$fname
+  rm -rf $i
+done
+
+for i in `ls cmrm-*`; do
+  chmod +x $i
+  ./$i
+  rm -rf $i
+done
+
+ecnt=`echo "select count(id) from cmr" | mysql -Dcdrlogs -s`
+pcnt=`echo "$ecnt - $scnt" | bc`
+if [ $pcnt != 0 ]; then
+  dolog "processed $pcnt records"
+fi
+
+rm -rf $PIDFILE
