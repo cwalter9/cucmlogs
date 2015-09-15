@@ -8,25 +8,27 @@ function getconf {
 
 CDR_LOGFILE=`getconf LOGFILE`
 CDR_MYSQL="mysql -Dcdrlogs -s"
+CDR_PIDFILE="/tmp/$PROCNAME.pid"
+CDR_WORKDIR=`getconf WORKDIR`
 
 function dolog {
-  echo "`date` - $PROCNAME - $1" >> /var/log/cdrlogs
+  echo "`date` - $PROCNAME - $1" >> $CDR_LOGFILE
 }
 
 function checklock {
-  PID=`cat $PIDFILE`
+  PID=`cat $CDR_PIDFILE`
   PIDCNT=`ps -ef | grep $PID | grep -v grep | wc -l`
   if [ $PIDCNT -eq 0 ]; then
     dolog "Lock file appears to be dead deleting to move on"
-    rm -rf $PIDFILE ; dolog "Deleted $PIDFILE for PID $PID"
+    rm -rf $CDR_PIDFILE ; dolog "Deleted $CDR_PIDFILE for PID $PID"
   fi
 }
 
 function checkrun {
-  if [ -f $PIDFILE ]; then
+  if [ -f $CDR_PIDFILE ]; then
     checklock ; dolog "Exiting already running" ; exit 2
   else
-    echo $$ > $PIDFILE
+    echo $$ > $CDR_PIDFILE
   fi
 }
 
@@ -38,5 +40,5 @@ function checksql {
   fi
 }
 
-export CDR_LOGFILE CDR_MYSQL
+export CDR_LOGFILE CDR_MYSQL CDR_PIDFILE
 

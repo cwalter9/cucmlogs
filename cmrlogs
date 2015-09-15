@@ -1,6 +1,5 @@
 #!/bin/bash
 
-PIDFILE="/tmp/cmrlogs.pid"
 PROCNAME="cmrlogs"
 
 cd /home/cdrlogs
@@ -8,7 +7,7 @@ cd /home/cdrlogs
 checkrun
 checksql
 
-cd /home/cdrlogs/incoming
+cd $CDR_WORKDIR
 
 scnt=`echo "select count(id) from cmr" | mysql -Dcdrlogs -s`
 
@@ -41,4 +40,4 @@ if [ $pcnt != 0 ]; then
   dolog "processed $pcnt records"
 fi
 
-rm -rf $PIDFILE
+rm -rf $CDR_PIDFILE
