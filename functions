@@ -1,0 +1,42 @@
+#!/bin/bash
+
+CONFFILE="/etc/cdrlogs.conf"
+
+function getconf {
+  cat $CONFFILE | grep $1 | gawk -F= '{ print $2 }'
+}
+
+CDR_LOGFILE=`getconf LOGFILE`
+CDR_MYSQL="mysql -Dcdrlogs -s"
+
+function dolog {
+  echo "`date` - $PROCNAME - $1" >> /var/log/cdrlogs
+}
+
+function checklock {
+  PID=`cat $PIDFILE`
+  PIDCNT=`ps -ef | grep $PID | grep -v grep | wc -l`
+  if [ $PIDCNT -eq 0 ]; then
+    dolog "Lock file appears to be dead deleting to move on"
+    rm -rf $PIDFILE ; dolog "Deleted $PIDFILE for PID $PID"
+  fi
+}
+
+function checkrun {
+  if [ -f $PIDFILE ]; then
+    checklock ; dolog "Exiting already running" ; exit 2
+  else
+    echo $$ > $PIDFILE
+  fi
+}
+
+function checksql {
+  sqlup=`echo "show status" | mysql | grep Uptime | grep -v since | gawk '{ print $2 }'`
+
+  if [ $sqlup -lt 300 ]; then
+    exit 3
+  fi
+}
+
+export CDR_LOGFILE CDR_MYSQL
+
