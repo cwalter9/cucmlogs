@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.17-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.14  Distrib 5.5.43-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: cdrlogs
 -- ------------------------------------------------------
--- Server version	10.0.17-MariaDB
+-- Server version	5.5.43-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,14 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `cdrlogs`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `cdrlogs` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `cdrlogs`;
 
 --
 -- Table structure for table `calltermcodes`
@@ -177,7 +169,65 @@ CREATE TABLE `cdr` (
   `huntPilotPattern` varchar(50) DEFAULT NULL,
   `status` int(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14683 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23343 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cmr`
+--
+
+DROP TABLE IF EXISTS `cmr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cmr` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cdrRecordType` int(11) DEFAULT NULL,
+  `globalCallID_callManagerId` int(11) DEFAULT NULL,
+  `globalCallID_callId` int(11) DEFAULT NULL,
+  `nodeId` int(11) DEFAULT NULL,
+  `directoryNum` varchar(50) DEFAULT NULL,
+  `callIdentifier` int(11) DEFAULT NULL,
+  `dateTimeStamp` int(11) DEFAULT NULL,
+  `numberPacketsSent` int(11) DEFAULT NULL,
+  `numberOctetsSent` int(11) DEFAULT NULL,
+  `numberPacketsReceived` int(11) DEFAULT NULL,
+  `numberOctetsReceived` int(11) DEFAULT NULL,
+  `numberPacketsLost` int(11) DEFAULT NULL,
+  `jitter` int(11) DEFAULT NULL,
+  `latency` int(11) DEFAULT NULL,
+  `pkid` int(11) DEFAULT NULL,
+  `directoryNumPartition` varchar(50) DEFAULT NULL,
+  `globalCallId_ClusterID` varchar(50) DEFAULT NULL,
+  `deviceName` varchar(129) DEFAULT NULL,
+  `varVQMetrics` varchar(600) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `videoContentType` varchar(10) DEFAULT NULL,
+  `videoDuration` int(11) DEFAULT NULL,
+  `numberVideoPacketsSent` int(11) DEFAULT NULL,
+  `numberVideoOctetsSent` int(11) DEFAULT NULL,
+  `numberVideoPacketsReceived` int(11) DEFAULT NULL,
+  `numberVideoOctetsReceived` int(11) DEFAULT NULL,
+  `numberVideoPacketsLost` int(11) DEFAULT NULL,
+  `videoAverageJitter` int(11) DEFAULT NULL,
+  `videoRoundTripTime` int(11) DEFAULT NULL,
+  `videoOneWayDelay` int(11) DEFAULT NULL,
+  `videoReceptionMetrics` varchar(600) DEFAULT NULL,
+  `videoTransmissionMetrics` varchar(600) DEFAULT NULL,
+  `videoContentType_channel2` varchar(10) DEFAULT NULL,
+  `videoDuration_channel2` int(11) DEFAULT NULL,
+  `numberVideoPacketsSent_channel2` int(11) DEFAULT NULL,
+  `numberVideoOctetsSent_channel2` int(11) DEFAULT NULL,
+  `numberVideoPacketsReceived_channel2` int(11) DEFAULT NULL,
+  `numberVideoOctetsReceived_channel2` int(11) DEFAULT NULL,
+  `numberVideoPacketsLost_channel2` int(11) DEFAULT NULL,
+  `videoAverageJitter_channel2` int(11) DEFAULT NULL,
+  `videoRoundTripTime_channel2` int(11) DEFAULT NULL,
+  `videoOneWayDelay_channel2` int(11) DEFAULT NULL,
+  `videoReceptionMetrics_channel2` varchar(600) DEFAULT NULL,
+  `videoTransmissionMetrics_channel2` varchar(600) DEFAULT NULL,
+  `status` int(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9827 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -529,12 +579,6 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
--- Current Database: `cdrlogs`
---
-
-USE `cdrlogs`;
-
---
 -- Final view structure for view `repOffhookOnhook`
 --
 
@@ -619,4 +663,4 @@ USE `cdrlogs`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-13  9:07:51
+-- Dump completed on 2015-09-14 22:17:43

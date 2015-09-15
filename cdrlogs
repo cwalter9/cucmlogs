@@ -1,31 +1,20 @@
 #!/bin/bash
 
-WORKDIR=`cat /etc/cucmlogs.conf | grep WORKDIR | gawk -F= '{ print $2 }'`
-MYSQLQ=`cat /etc/cucmlogs.conf | grep MYSQLQ | gawk -F= '{ print $2 }'`
-LOGFILE=`cat /etc/cucmlogs.conf | grep LOGFILE | gawk -F= '{ print $2 }'`
+PROCNAME="cdrlogs"
 
-sqlup=`echo "show status" | mysql | grep Uptime | grep -v since | gawk '{ print $2 }'`
+cd /home/cdrlogs
+. functions
+checkrun
+checksql
 
-if [ $sqlup -lt 300 ]; then
-  exit 3
-fi
+cd /home/cdrlogs/incoming
 
-cd $WORKDIR
+scnt=`echo "select count(id) from cdr" | mysql -Dcdrlogs -s`
 
-if [ -f cdrlogs.pid ]; then
-  exit 2
-else
-  touch cdrlogs.pid
-fi
-
-scnt=`echo "select count(id) from cdr" | $MYSQLQ`
-
-for i in `ls cdr*`; do
-  sed '1d' $i | sed '1d' - | sed -e "s/\"/'/g" - > /tmp/cdr-$i
+for i in `ls cdr_*`; do
+  sed '1d' $i | sed '1d' - | sed -e "s/\"/'/g" - > cdr-$i
   rm -rf $i
 done
-
-cd /tmp
 
 for i in `ls cdr-*`; do
   fname=`echo $i | gawk -F- '{ print $2 }'`
@@ -45,10 +34,10 @@ for i in `ls mysql-*`; do
   rm -rf $i
 done
 
-ecnt=`echo "select count(id) from cdr" | $MYSQLQ`
+ecnt=`echo "select count(id) from cdr" | mysql -Dcdrlogs -s`
 pcnt=`echo "$ecnt - $scnt" | bc`
 if [ $pcnt != 0 ]; then
-  echo "`date` - cdrlogs processed $pcnt records" >> $LOGFILE
+  dolog "processed $pcnt records"
 fi
 
-rm -rf cdrlogs.pid
+rm -rf $CDR_PIDFILE
